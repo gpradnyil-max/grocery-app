@@ -1,16 +1,49 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// Data file path for persistence
+const DATA_FILE = path.join(__dirname, 'data', 'grocery-items.json');
+
+// Ensure data directory exists
+const dataDir = path.dirname(DATA_FILE);
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+
+// Load items from file or initialize empty array
+function loadItems() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const data = fs.readFileSync(DATA_FILE, 'utf8');
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.error('Error loading items:', error);
+  }
+  return [];
+}
+
+// Save items to file
+function saveItems() {
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(groceryItems, null, 2), 'utf8');
+  } catch (error) {
+    console.error('Error saving items:', error);
+  }
+}
+
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// In-memory storage for grocery items
-let groceryItems = [];
+// Load persisted items on startup
+let groceryItems = loadItems();
+console.log(`📦 Loaded ${groceryItems.length} items from cache`);
 
 // API Routes
 
@@ -32,6 +65,7 @@ app.post('/api/items', (req, res) => {
     createdAt: new Date().toISOString()
   };
   groceryItems.push(newItem);
+  saveItems(); // Persist to file
   res.status(201).json(newItem);
 });
 
@@ -49,6 +83,14 @@ app.put('/api/items/:id', (req, res) => {
   if (quantity !== undefined) groceryItems[itemIndex].quantity = quantity;
   if (notes !== undefined) groceryItems[itemIndex].notes = notes;
   
+  // Add timestamp for when item was bought
+  if (bought === true) {
+    groceryItems[itemIndex].boughtAt = new Date().toISOString();
+  } else if (bought === false) {
+    delete groceryItems[itemIndex].boughtAt;
+  }
+  
+  saveItems(); // Persist to file
   res.json(groceryItems[itemIndex]);
 });
 
@@ -62,12 +104,14 @@ app.delete('/api/items/:id', (req, res) => {
   }
   
   groceryItems.splice(itemIndex, 1);
+  saveItems(); // Persist to file
   res.status(204).send();
 });
 
 // Clear all bought items
 app.delete('/api/items/bought/clear', (req, res) => {
   groceryItems = groceryItems.filter(item => !item.bought);
+  saveItems(); // Persist to file
   res.status(204).send();
 });
 

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "4836f031-28d0-440f-91c9-7d54fa10c919",
+    "name": "Advait's Body Wash",
+    "quantity": 1,
+    "category": "other",
+    "notes": "",
+    "bought": false,
+    "createdAt": "2026-01-10T22:07:16.394Z"
+  },
+  {
+    "id": "013e2bd6-3c4f-400e-a450-391cb4c77e1e",
+    "name": "Egg",
+    "quantity": 1,
+    "category": "dairy",
+    "notes": "",
+    "bought": false,
+    "createdAt": "2026-01-10T22:08:08.149Z"
+  },
+  {
+    "id": "2d9c8389-b1f4-41ec-858a-aebe5fd695cf",
+    "name": "Milk",
+    "quantity": 5,
+    "category": "dairy",
+    "notes": "",
+    "bought": false,
+    "createdAt": "2026-01-10T22:08:24.071Z"
+  },
+  {
+    "id": "af0e8581-d737-4617-a4fd-f4210229af25",
+    "name": "Chicken",
+    "quantity": 1,
+    "category": "meat",
+    "notes": "",
+    "bought": false,
+    "createdAt": "2026-01-10T22:08:39.260Z"
+  },
+  {
+    "id": "5fc01bc1-89c9-46fd-90f8-8ea3ccd78e79",
+    "name": "Paneer",
+    "quantity": 1,
+    "category": "dairy",
+    "notes": "",
+    "bought": false,
+    "createdAt": "2026-01-10T22:10:39.444Z"
+  }
+]

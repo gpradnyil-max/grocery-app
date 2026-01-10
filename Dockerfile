@@ -1,5 +1,5 @@
 # Use the official Node.js LTS image
-FROM node:24-slim
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
@@ -7,11 +7,14 @@ WORKDIR /app
 # Copy package files first for better caching
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies (use npm install to handle lock file sync)
+RUN npm install --omit=dev
 
 # Copy application code
 COPY . .
+
+# Create data directory for persistence
+RUN mkdir -p /app/data
 
 # Expose the port Cloud Run will use
 EXPOSE 8080
