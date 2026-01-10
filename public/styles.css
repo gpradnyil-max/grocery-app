@@ -1019,49 +1019,90 @@ body {
 /* ============================================
    DARK MODE (System Preference)
    ============================================ */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #1C1C1E;
-    --bg-secondary: #2C2C2E;
-    --bg-card: #2C2C2E;
-    --text-primary: #FFFFFF;
-    --text-secondary: #8E8E93;
-    --text-tertiary: #636366;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --gradient-hero: linear-gradient(180deg, #1C1C1E 0%, #2C2C2E 100%);
-    --input-bg: #3A3A3C;
-  }
-  
-  .nav-bar {
-    background: rgba(28, 28, 30, 0.8);
-  }
-  
-  .form-group input[type="text"],
-  .form-group select {
-    background: var(--input-bg, #3A3A3C) !important;
-    color: #FFFFFF !important;
-    border-color: rgba(255, 255, 255, 0.2);
-    caret-color: #FFFFFF;
-  }
-  
-  .form-group input[type="text"]::placeholder {
-    color: #8E8E93 !important;
-    opacity: 1;
-  }
-  
-  .form-group input[type="text"]:focus,
-  .form-group select:focus {
-    background: #48484A !important;
-    border-color: var(--apple-blue);
-  }
-  
-  .quantity-control input {
-    background: var(--input-bg, #3A3A3C) !important;
-    color: #FFFFFF !important;
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .quantity-control input:focus {
-    background: #48484A !important;
-  }
+/* Dark Theme - Applied via .dark-theme class */
+.dark-theme {
+  --bg-primary: #1C1C1E;
+  --bg-secondary: #2C2C2E;
+  --bg-card: #2C2C2E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #8E8E93;
+  --text-tertiary: #636366;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --gradient-hero: linear-gradient(180deg, #1C1C1E 0%, #2C2C2E 100%);
+  --input-bg: #3A3A3C;
+}
+
+.dark-theme .nav-bar {
+  background: rgba(28, 28, 30, 0.8);
+}
+
+.dark-theme .form-group input[type="text"],
+.dark-theme .form-group select {
+  background: var(--input-bg, #3A3A3C) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.2);
+  caret-color: #FFFFFF;
+}
+
+.dark-theme .form-group input[type="text"]::placeholder {
+  color: #8E8E93 !important;
+  opacity: 1;
+}
+
+.dark-theme .form-group input[type="text"]:focus,
+.dark-theme .form-group select:focus {
+  background: #48484A !important;
+  border-color: var(--apple-blue);
+}
+
+.dark-theme .quantity-control input {
+  background: var(--input-bg, #3A3A3C) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-theme .quantity-control input:focus {
+  background: #48484A !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-size: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  transition: all var(--transition-normal);
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+.dark-theme .theme-toggle .icon-sun {
+  display: none;
+}
+
+.dark-theme .theme-toggle .icon-moon {
+  display: inline;
 }

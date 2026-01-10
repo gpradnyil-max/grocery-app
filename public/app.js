@@ -3,6 +3,26 @@
  * Main application logic for adding grocery items
  */
 
+// Theme handling - Initialize on page load
+(function initTheme() {
+  const savedTheme = localStorage.getItem('grocery-theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  }
+})();
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark-theme');
+  localStorage.setItem('grocery-theme', isDark ? 'dark' : 'light');
+  
+  // Fun animation on theme toggle
+  const btn = document.querySelector('.theme-toggle');
+  btn.style.transform = 'rotate(360deg) scale(1.2)';
+  setTimeout(() => {
+    btn.style.transform = '';
+  }, 300);
+}
+
 // Category emoji mappings
 const categoryEmojis = {
   fruits: '🍎',
