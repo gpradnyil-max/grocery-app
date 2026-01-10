@@ -1,0 +1,17 @@
+{
+  "name": "grocery-app",
+  "version": "1.0.0",
+  "description": "A fun grocery shopping list app for the whole family",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["grocery", "shopping", "list", "family"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  }
+}
