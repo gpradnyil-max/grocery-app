@@ -84,6 +84,16 @@ async function insertItemToBigQuery(item) {
         bought: item.bought,
         createdAt: item.createdAt ? bigquery.timestamp(new Date(item.createdAt)) : null,
         boughtAt: item.boughtAt ? bigquery.timestamp(new Date(item.boughtAt)) : null
+      },
+      types: {
+        id: 'STRING',
+        name: 'STRING',
+        quantity: 'INT64',
+        category: 'STRING',
+        notes: 'STRING',
+        bought: 'BOOL',
+        createdAt: 'TIMESTAMP',
+        boughtAt: 'TIMESTAMP'
       }
     };
     await bigquery.query(options);
@@ -94,10 +104,9 @@ async function insertItemToBigQuery(item) {
   }
 }
 
-// Update item in BigQuery (using DELETE + INSERT since BigQuery doesn't support UPDATE easily)
+// Update item in BigQuery using MERGE statement
 async function updateItemInBigQuery(item) {
   try {
-    // Use MERGE statement for updates
     const query = `
       MERGE \`${DATASET_ID}.${TABLE_ID}\` T
       USING (SELECT @id as id, @name as name, @quantity as quantity, @category as category, 
@@ -118,6 +127,16 @@ async function updateItemInBigQuery(item) {
         bought: item.bought,
         createdAt: item.createdAt ? bigquery.timestamp(new Date(item.createdAt)) : null,
         boughtAt: item.boughtAt ? bigquery.timestamp(new Date(item.boughtAt)) : null
+      },
+      types: {
+        id: 'STRING',
+        name: 'STRING',
+        quantity: 'INT64',
+        category: 'STRING',
+        notes: 'STRING',
+        bought: 'BOOL',
+        createdAt: 'TIMESTAMP',
+        boughtAt: 'TIMESTAMP'
       }
     };
     await bigquery.query(options);
