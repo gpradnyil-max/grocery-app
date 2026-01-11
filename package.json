@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/bigquery": "^7.3.0",
     "express": "^5.1.0",
     "uuid": "^9.0.0"
   }
